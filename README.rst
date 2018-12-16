@@ -16,7 +16,7 @@ tcp_sql
 
 
 
-TCP server that takes sql queries from telnet connection and returns the data from an excel file
+TCP server that takes SQL like statements, finds rows from a fixed CSV file that match the query, and prints the results
 
 
 * Free software: GNU General Public License v3
@@ -27,4 +27,12 @@ Features
 --------
 
 * Returns query outputs from a TCP server
+* Support * in the select query
+* Support different fields in the where clause
+* Support multiple fields in the select query (not just name,id)
 
+Expected Program Run
+--------
+
+* telnet 127.0.0.1 9999
+> select name, id from actors where age<=21;
