@@ -35,10 +35,21 @@ Start TCP server
 --------
 
 * cd ${PROJECT_ROOT}/tcp_sql
-Run > python cli.py on commaond prompt ::
+Run > python cli.py on command prompt
 
 Expected Program Run
 --------
 
 * telnet 127.0.0.1 9999
-> select name,id from actors where age<=21;
+select * from actors where age<=22;::
+        id department age name address
+        1 kjajs 21 amir jajskajs jsakj
+        2 jjkaj 22 khan ajak
+
+Test Cases
+---------
+* select; (output : Invalid Sql Query)
+* select name, id; (output : Invalid Sql Query)
+* select name, id from;  (output : Invalid Sql Query)
+* select name, id from actors where age;  (output : Invalid Sql Query)
+* select name, id from actors where age >;  (output : Invalid Sql Query)
