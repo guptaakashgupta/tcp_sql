@@ -35,7 +35,7 @@ Start TCP server
 --------
 
 * cd ${PROJECT_ROOT}/tcp_sql
-Run > python cli.py on command prompt
+Run > ```python cli.py``` on command prompt
 
 Expected Program Run
 --------
