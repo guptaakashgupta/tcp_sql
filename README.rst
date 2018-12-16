@@ -51,3 +51,4 @@ Test Cases
 * select name, id from;  (output : Invalid Sql Query)
 * select name, id from actors where age;  (output : Invalid Sql Query)
 * select name, id from actors where age >;  (output : Invalid Sql Query)
+* select * from vendors; (output : Bad Table Name) 
