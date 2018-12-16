@@ -31,8 +31,14 @@ Features
 * Support different fields in the where clause
 * Support multiple fields in the select query (not just name,id)
 
+Start TCP server
+--------
+
+* cd ${PROJECT_ROOT}/tcp_sql
+Run > python cli.py on commaond prompt ::
+
 Expected Program Run
 --------
 
 * telnet 127.0.0.1 9999
-> select name, id from actors where age<=21;
+> select name,id from actors where age<=21;
