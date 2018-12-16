@@ -41,10 +41,7 @@ Expected Program Run
 --------
 
 * telnet 127.0.0.1 9999
-select * from actors where age<=22;::
-        id department age name address
-        1 kjajs 21 amir jajskajs jsakj
-        2 jjkaj 22 khan ajak
+```select * from actors where age<=22;```
 
 Test Cases
 ---------
