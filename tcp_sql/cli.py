@@ -2,8 +2,10 @@
 
 import logging
 import SocketServer
+from pyparsing import ParseException
 
 from tcp_sql import get_query_results
+from parse_sql import parse_input_query
 
 logging.basicConfig(level=logging.DEBUG,
                     format='%(name)s: %(message)s',
@@ -27,7 +29,11 @@ class TCPServerforSQL(SocketServer.BaseRequestHandler):
             print(self.data)
             if self.data != 'exit':
                 try:
-                    query_result = get_query_results(self.data)
+                    list = parse_input_query(self.data)
+                    print(list)
+                    # query_result = get_query_results(self.data)
+                except ParseException as e:
+                    query_result = str(e)+'\n'
                 except IOError as e:
                     query_result = 'Bad Table Name\n'
                 except Exception as e:
