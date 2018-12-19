@@ -55,3 +55,35 @@ def get_query_results(data):
 
     raise Exception('Invalid Sql Query\n')
 
+
+def get_final_query_results(parsed_list):
+
+    file_name = parsed_list[0] + '.csv'
+
+    with open(file_name, 'r') as file:
+        rows = []
+        csvreader = csv.DictReader(file)
+
+        for row in csvreader:
+            rows.append(row)
+
+        if(parsed_list[2]):
+            filter_criteria = parsed_list[2]
+            rows = filter_rows(rows,filter_criteria)
+        # return select * from Table_name output
+        if (parsed_list[1] == '*'):
+            return format_query_result(rows)
+
+        else:
+            field_list = parsed_list[1]
+            fields_set = set(field_list)
+            table_key_set = set(rows[0].keys())
+            # fields set in input must be a subset table_key_set
+            if(len(table_key_set&fields_set)==len(fields_set)):
+                list_columns_to_remove = list(table_key_set - fields_set)
+                for row in rows:
+                    for column in list_columns_to_remove:
+                        del row[column]
+
+            return format_query_result(rows)
+

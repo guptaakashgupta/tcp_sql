@@ -4,7 +4,7 @@ import logging
 import SocketServer
 from pyparsing import ParseException
 
-from tcp_sql import get_query_results
+from tcp_sql import get_query_results, get_final_query_results
 from parse_sql import parse_input_query
 
 logging.basicConfig(level=logging.DEBUG,
@@ -29,8 +29,11 @@ class TCPServerforSQL(SocketServer.BaseRequestHandler):
             print(self.data)
             if self.data != 'exit':
                 try:
-                    list = parse_input_query(self.data)
-                    print(list)
+                    list_data = parse_input_query(self.data)
+                    # print(list)
+                    if 'where' in self.data and not list_data[2]:
+                        raise Exception('Incomplete where clause\n')
+                    query_result = get_final_query_results(list_data)
                     # query_result = get_query_results(self.data)
                 except ParseException as e:
                     query_result = str(e)+'\n'

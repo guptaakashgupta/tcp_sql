@@ -21,11 +21,15 @@ selectStmt << (select + ('*' | columns).setResultsName("columns") + _from + tabl
 
 def parse_input_query(query):
     parsed_query = selectStmt.parseString(query)
-    return [parsed_query.table, parsed_query.columns.asList(), parsed_query.where.asList()[1] if parsed_query.where.asList()[0] else []]
+
+    where_clause = parsed_query.where.asList()[1] if parsed_query.where.asList()[0] else []
+    columns_clause = parsed_query.columns if isinstance(parsed_query.columns,str) else parsed_query.columns.asList()
+    return [parsed_query.table, columns_clause, where_clause]
 
 if __name__ == "__main__":
     print(parse_input_query('SELECT id, username, email FROM users WHERE username = "johnabc"'))
     print(parse_input_query('SELECT id, username, email FROM users WHERE age > 24'))
-    print(parse_input_query('SELECT id, username, email FROM users'))
+    print(parse_input_query('SELECT * FROM users'))
+    print(parse_input_query('SELECT * FROM users where age'))
     
     
