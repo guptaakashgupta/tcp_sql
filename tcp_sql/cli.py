@@ -20,17 +20,21 @@ class TCPServerforSQL(SocketServer.BaseRequestHandler):
 
     def handle(self):
         # self.request - TCP socket connected to the client
-        self.data = self.request.recv(1024).strip()
-        print("{} sent:".format(self.client_address[0]))
-        print(self.data)
-        try:
-            query_result = get_query_results(self.data)
-        except IOError as e:
-            query_result = 'Bad Table Name\n'
-        except Exception as e:
-            query_result = str(e)
+        self.data = None
+        while self.data != 'exit':
+            self.data = self.request.recv(1024).strip().lower()
+            print("{} sent:".format(self.client_address[0]))
+            print(self.data)
+            if self.data != 'exit':
+                try:
+                    query_result = get_query_results(self.data)
+                except IOError as e:
+                    query_result = 'Bad Table Name\n'
+                except Exception as e:
+                    query_result = str(e)
+                
+                self.request.sendall(query_result)
         
-        self.request.sendall(query_result)
 if __name__ == "__main__":
     HOST, PORT = "localhost", 9999
 

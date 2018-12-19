@@ -30,6 +30,7 @@ Features
 * Support * in the select query
 * Support different fields in the where clause
 * Support multiple fields in the select query (not just name,id)
+* Persistent TCP connection (Type: "exit" to exit the client)
 * Extend FROM TABLENAME clause by adding TABLENAME.csv in tcp_sql module
  
 Start TCP server
