@@ -5,4 +5,4 @@ def format_query_result(rows):
 
         for row in rows:
             ans += ' '.join(row.values()) + '\n'
-    return ans
+    return ans if ans else 'Empty Set \n'
